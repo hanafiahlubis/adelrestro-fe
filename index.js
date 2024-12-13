@@ -8,12 +8,11 @@ const checkout = document.querySelector(".checkout");
 let orders = [];
 
 checkout.addEventListener('click', function () {
-
   openCart.style.display = "none";
   cart.style.right = '-100%';
-  container.style.transform = 'translateX(0)';
+  container.style = '';
   orders = [];
-
+  document.documentElement.style = "";
   document.querySelector(".badge").textContent = orders.length;
 });
 
@@ -21,9 +20,6 @@ checkout.addEventListener('click', function () {
 
 
 iconCart.addEventListener('click', function () {
-  if (cart.style.right === '' || cart.style.right === '-100%') {
-    console.log("masukkkk");
-
     openCart.style.display = "block";
     cart.style.right = '0';
     container.style.transform = 'translateX(-400px)';
@@ -65,12 +61,12 @@ iconCart.addEventListener('click', function () {
       });
     });
 
+    openCart.scrollIntoView({
+      behavior: 'smooth', // Scroll halus
+      block: 'start' // Pastikan scroll ke atas elemen
+    });
 
-  } else {
-    openCart.style.display = "none";
-    cart.style.right = '-100%';
-    container.style.transform = 'translateX(0)';
-  }
+    document.documentElement.style = "overflow: hidden";
 });
 
 
@@ -80,10 +76,10 @@ iconCart.addEventListener('click', function () {
 document.querySelector(".close").onclick = () => {
   openCart.style.display = "none";
   cart.style.right = '-100%';
-  container.style.transform = 'translateX(0)';
+  container.style = '';
   listCart.innerHTML = "";
   iconCart.style = "width: 50px; height: 50px;display: flex; justify-content: center; align-items: center; position: fixed; top: 12px;right: 3%";
-
+  document.documentElement.style = "";
 }
 document.addEventListener('DOMContentLoaded', () => {
   const header = document.querySelector("header"); window.addEventListener('scroll', () => {
@@ -92,11 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 function getIngredient() {
-  fetch("http://localhost:3000/foot")
+  fetch("https://maddening-confirmed-cosmos.glitch.me/food")
     .then((res) => res.json())
     .then((data) => {
-      console.log(data, " isi nya apa yah");
-
       for (let a = 0; a < 8; a++) {
         const popularItemDiv = document.createElement("div");
         popularItemDiv.className = "popular-box";
@@ -106,9 +100,9 @@ function getIngredient() {
         const popularImg = document.createElement("img");
         popularImg.src = data[a].url;
         popularImg.alt = "foodies";
-        popularImg.style.height = "202px"
+        popularImg.style.height = "202px";
         popularImg.onclick = async () => {
-          const res = await fetch(`http://localhost:3000/foot/${data[a].id}`);
+          const res = await fetch(`https://maddening-confirmed-cosmos.glitch.me/food/${data[a].id}`);
           const dataDetail = await res.json();
 
           const container = document.createElement("div");
