@@ -44,6 +44,5 @@ Access the Live Website
 * Frontend: Open the live website via this link:
 
     AdelRestor Live Website:  
-``` bash 
     URL: 
     https://adelrestro-fe.vercel.app/
